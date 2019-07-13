@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>文字两端对齐</title>
+  <style type="text/css">
+    div {
+      width: 400px;
+      margin: 20px auto;
+    }
+
+    div.one {
+      background: red;
+    }
+
+    div.two {
+      text-align: justify;
+      background: orange;
+    }
+
+    div.three {
+      text-align: justify;
+      background: yellow;
+    }
+
+    .four > span {
+      background: green;
+      display: inline-block;
+      width: 6em;
+      text-align: justify;
+      line-height: 20px;
+      height: 20px;
+      overflow: hidden;
+    }
+    .four > span:after {
+      content: '';
+      display: inline-block;
+      width: 100%;
+    }
+
+    div.five {
+      background: cyan;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="one">
+    一文注生義的光代大改外來再像先人近，數辦足？不參病，想然青眾也者，其該真法分信就度心土我回愛檢較去。
+    一文注生義的光代大改外來再像先人近，數辦足？不參病，想然青眾也者，其該真法分信就度心土我回愛檢較去。
+  </div>
+
+  <div class="two">
+    一文注生義的光代大改外來再像先人近，數辦足？不參病，想然青眾也者，其該真法分信就度心土我回愛檢較去。
+    一文注生義的光代大改外來再像先人近，數辦足？不參病，想然青眾也者，其該真法分信就度心土我回愛檢較去。
+    -- 使用了 <code>text-align: justify</code>
+  </div>
+
+  <div class="three">
+      <code>text-align: justify</code> 只有在换行时才生效
+  </div>
+
+  <div class="four">
+    <span>姓名</span><br/>
+    <span>联系方式</span>
+  </div>
+
+  <div class="five">
+    实现代码:<br/>
+    <pre>
+      .four > span {
+        background: green;
+        display: inline-block;
+        width: 6em;
+        text-align: justify;
+        line-height: 20px;
+        height: 20px;
+        overflow: hidden;
+      }
+      .four > span:after {
+        content: '';
+        display: inline-block;
+        width: 100%;
+      }
+    </pre>
+  </div>
+
+</body>
+</html>
