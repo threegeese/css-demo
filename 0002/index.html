@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>文字溢出省略</title>
+  <style type="text/css">
+    div {
+      width: 400px;
+      margin: 20px auto;
+    }
+
+    div.one {
+      background: #fffcc1;
+    }
+
+    div.two {
+      background: #fdeaab;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    div.three {
+      background: #cba1d2;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    div.four {
+      background: #f9f3ec;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="one">
+    原始假文：色人維北、人南以男她處！十發質民我發建兒受怎特廣子了情用的平、統前林相一活造愛相定英太內大。
+    界心放那己，究不許突身花統現入。
+  </div>
+
+  <div class="two">
+    单行文字溢出省略：色人維北、人南以男她處！十發質民我發建兒受怎特廣子了情用的平、統前林相一活造愛相定英太內大。
+    界心放那己，究不許突身花統現入。
+  </div>
+  
+  <div class="three">
+    多行文字溢出省略：色人維北、人南以男她處！十發質民我發建兒受怎特廣子了情用的平、統前林相一活造愛相定英太內大。
+    界心放那己，究不許突身花統現入。
+  </div>
+
+  <div class="four">
+      实现代码:<br/>
+      <pre>
+        div.two {   /* 单行 */
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+    
+        div.three {   /* 多行 */
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+      </pre>
+    </div>
+
+</body>
+</html>
