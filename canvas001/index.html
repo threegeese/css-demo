@@ -5,23 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Canvas</title>
+  <style type="text/css">
+    body { 
+      margin: 0;
+      padding: 0 0 40px 0;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    canvas { border: 1px solid #ddd; }
+  </style>
 </head>
 <body>
 
+  <p>基本用法</p>
   <canvas id="tutorial"></canvas>
 
-  <script>
-    let canvas = document.getElementById('tutorial')
-    let ctx = canvas.getContext('2d')
+  <p>绘制矩形</p>
+  <canvas id="drawRectangle"></canvas>
 
-    ctx.fillStyle = 'cyan'
-    ctx.fillRect(10, 10, 100, 100)
+  <p>绘制路径</p>
+  <canvas id="drawPath"></canvas>
 
-    ctx.fillStyle = "rgb(200,0,0)";
-    ctx.fillRect(160, 10, 55, 50);
+  <p>二次贝塞尔曲线及三次贝塞尔曲线</p>
+  <canvas id="curve"></canvas>
 
-    ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
-    ctx.fillRect(180, 30, 55, 50);
-  </script>
+  <script src="./main.js"></script>
 </body>
 </html>
