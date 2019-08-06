@@ -8,31 +8,78 @@
   <style type="text/css">
     body { 
       margin: 0;
-      padding: 0 0 40px 0;
+      padding: 20px;
       box-sizing: border-box;
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      flex-wrap: wrap;
+      /* justify-content: space-around; */
     }
+    div { margin-right: 20px; }
+    p { margin: 8px 0; }
     canvas { border: 1px solid #ddd; }
   </style>
 </head>
 <body>
 
-  <p>基本用法</p>
-  <canvas id="tutorial"></canvas>
+  <div>
+    <p>基本用法</p>
+    <canvas id="tutorial"></canvas>
+  </div>
 
-  <p>绘制矩形</p>
-  <canvas id="drawRectangle"></canvas>
+  <div>
+    <p>绘制矩形</p>
+    <canvas id="drawRectangle"></canvas>
+  </div>
 
-  <p>绘制路径</p>
-  <canvas id="drawPath"></canvas>
+  <div>
+    <p>绘制路径</p>
+    <canvas id="drawPath"></canvas>
+  </div>
 
-  <p>二次贝塞尔曲线及三次贝塞尔曲线</p>
-  <canvas id="curve"></canvas>
+  <div>
+    <p>二次贝塞尔曲线及三次贝塞尔曲线</p>
+    <canvas id="curve"></canvas>
+  </div>
 
-  <p>Path2D 对象</p>
-  <canvas id="path2d"></canvas>
+  <div>
+    <p>Path2D 对象</p>
+    <canvas id="path2d"></canvas>
+  </div>
+
+  <div>
+    <p>色彩</p>
+    <canvas id="color"></canvas>
+  </div>
+  
+  <div>
+    <p>线型 -- 线的样式</p>
+    <canvas id="line"></canvas>
+  </div>
+
+  <div>
+    <p>虚线</p>
+    <canvas id="dottedLine"></canvas>
+  </div>
+
+  <div>
+    <p>渐变</p>
+    <canvas id="gradients"></canvas>
+  </div>
+
+  <div>
+    <p>图像</p>
+    <canvas id="pattern"></canvas>
+  </div>
+
+  <div>
+    <p>阴影</p>
+    <canvas id="fontShadow"></canvas>
+  </div>
+  
+  <div>
+    <p>填充规则</p>
+    <canvas id="evenodd"></canvas>
+  </div>
 
   <script src="./main.js"></script>
 </body>

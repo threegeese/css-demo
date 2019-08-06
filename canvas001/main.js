@@ -85,4 +85,127 @@ paintCircle.arc(100, 35, 25, 0, 2 * Math.PI)
 drawPath2D.stroke(paintRectangle)
 drawPath2D.fill(paintCircle)
 
-//
+// 色彩
+let color = document.getElementById('color')
+let drawColor = color.getContext('2d')
+
+for(let i=0; i<6; i++) {
+  for(let j=0; j<6; j++) {
+    drawColor.fillStyle = `rgb(${Math.floor(255-42.5*i)}, ${Math.floor(255-42.5*j)}, 0)`
+    drawColor.fillRect(j*20, i*20, 20, 20)
+  }
+}
+
+for(let i=0; i<6; i++) {
+  for(let j=0; j<6; j++) {
+    drawColor.strokeStyle = `rgb(0, ${Math.floor(255-42.5*i)}, ${Math.floor(255-42.5*j)})`
+    drawColor.beginPath()
+    drawColor.arc(152.5+j*25, 12.5+i*25, 10, 0, Math.PI*2, true)
+    drawColor.stroke()
+  }
+}
+
+// 线型
+let drawLine = document.getElementById('line').getContext('2d')
+
+for(let i=0; i<10; i++) {
+  drawLine.lineWidth = i + 1
+  drawLine.beginPath()
+  drawLine.moveTo(5+i*14, 5)
+  drawLine.lineTo(5+i*14, 140)
+  drawLine.stroke()
+}
+
+drawLine.strokeStyle = '#09f'
+drawLine.beginPath();
+drawLine.moveTo(160, 10)
+drawLine.lineTo(290, 10)
+drawLine.moveTo(160, 140)
+drawLine.lineTo(290, 140)
+drawLine.lineWidth = 1
+drawLine.stroke()
+
+let lineCap = ['butt','round','square']
+drawLine.strokeStyle = 'black'
+for (let i=0; i<lineCap.length; i++){
+  drawLine.lineWidth = 15
+  drawLine.lineCap = lineCap[i]
+  drawLine.beginPath()
+  drawLine.moveTo(180+i*50, 10)
+  drawLine.lineTo(180+i*50, 140)
+  drawLine.stroke()
+}
+
+// 虚线
+let dottedLine = document.getElementById('dottedLine').getContext('2d')
+dottedLine.setLineDash([4, 2])
+dottedLine.strokeRect(10, 10, 100, 100)
+dottedLine.beginPath()
+dottedLine.moveTo(10, 140)
+dottedLine.lineTo(100, 140)
+dottedLine.stroke()
+
+let offset = 0
+function clearScreen() {
+  dottedLine.clearRect(120, 0, 180, canvas.height)
+  dottedLine.setLineDash([4, 2])
+  dottedLine.lineDashOffset = -offset
+  dottedLine.strokeRect(140, 10, 100, 100)
+}
+
+function march() {
+  offset += 1
+  if (offset > 16) {
+    offset = 0
+  }
+  clearScreen()
+  setTimeout(march, 20)
+}
+
+march()
+
+// 渐变
+let gradients = document.getElementById('gradients').getContext('2d')
+let lineGrad = gradients.createLinearGradient(20, 20, 120, 120)
+lineGrad.addColorStop(0, '#08ffc8')
+lineGrad.addColorStop(0.5, '#eb5f5d')
+
+gradients.fillStyle = lineGrad
+gradients.fillRect(0, 0, 100, 100)
+
+let radgrad = gradients.createRadialGradient(150, 50, 10, 160, 60, 30)
+radgrad.addColorStop(0, '#e41749')
+radgrad.addColorStop(0.5, '#fff3b1')
+radgrad.addColorStop(1, 'rgba(228, 199, 0, 0)')
+
+gradients.fillStyle = radgrad
+gradients.fillRect(120, 0, 100, 150)
+
+// 图像
+let pattern = document.getElementById('pattern').getContext('2d')
+let img = new Image()
+img.src = 'https://mdn.mozillademos.org/files/222/Canvas_createpattern.png'
+img.onload = function () {
+  let ptrn = ctx.createPattern(img, 'repeat')
+  pattern.fillStyle = ptrn
+  pattern.fillRect(0, 0, 150, 150)
+}
+
+// 阴影
+let fontShadow = document.getElementById('fontShadow').getContext('2d')
+
+fontShadow.shadowOffsetX = 2
+fontShadow.shadowOffsetY = 2
+fontShadow.shadowBlur = 2
+fontShadow.shadowColor = "rgba(0, 0, 0, 0.5)"
+
+fontShadow.font = "20px Times New Roman"
+fontShadow.fillStyle = "Black"
+fontShadow.fillText("Sample String", 5, 30)
+
+// 填充规则
+let evenodd = document.getElementById('evenodd').getContext('2d')
+evenodd.arc(50, 50, 30, 0, Math.PI*2, true)
+evenodd.arc(50, 50, 15, 0, Math.PI*2, true)
+evenodd.fill("evenodd")
+
