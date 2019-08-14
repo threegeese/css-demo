@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Google Doodle</title>
+  <style>
+    body { margin: 0; padding: 0; box-sizing: border-box; }
+    .doodle { width: 600px; margin: 90px auto 0; }
+    .doodle > .bg {
+      background: transparent url("./film.jpg") repeat 0 0;
+      margin: 0 auto;
+      position: relative;
+      width: 469px;
+      height: 162px;
+    }
+    .doodle > .bg > .play {
+      position: absolute;
+      top: 54px;
+      left: 201px;
+      width: 67px;
+      height: 54px;
+      background: url("./play.jpg") no-repeat 0 0;
+    }
+    .doodle > .bg > .mask {
+      width: 469px;
+      height: 162px;
+      background: url("./mask.png") no-repeat 0 0;
+      position: absolute;
+      left: 0;
+      top: 0;
+      cursor: pointer;
+    }
+    .doodle > .bg + p {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="doodle">
+    <div id="bg" class="bg">
+      <div id="play" class="play"></div>
+      <div id="mask" class="mask"></div>
+    </div>
+    <p><a href="https://github.com/FrankFang/google_doodle_clone" target="_blank">源项目地址</a></p>
+  </div>
+
+  <script>
+    (function (widnow, document) {
+      var G = function (id) {
+        return document.getElementById(id);
+      }
+      var maxSpeed = 67;
+      var initial = 1;
+      var acceleration = 1;
+      var bSpeed = initial;
+      var pSpeed = initial;
+      var interval = 25;
+      var bg = G('bg');
+      var play = G('play');
+      var mask = G('mask');
+      var bgPlay = function () {
+        setTimeout(function () {
+          var pos = bg.style.backgroundPosition;
+          var m = pos.match(/(-?\d+)\S+\s(-?\d+)\S+/) || [0, 0, 0];
+          var posX = m[1] - 0;
+          posX = (posX <= -804) ? (posX + 804) : posX;
+          var posY = m[2] - 0;
+          bg.style.backgroundPosition = posX - (bSpeed > 5 ? bSpeed : 3) + "px " + posY + "px";
+          bSpeed < maxSpeed ? (bSpeed += acceleration) : 0;
+          setTimeout(bgPlay, interval);
+        }, interval);
+      };
+      var playPlay = function () {
+        setTimeout(function () {
+          var pos = play.style.backgroundPosition;
+          var m = pos.match(/(-?\d+)\S+\s(-?\d+)\S+/) || [0, 0, 0];
+          var posX = m[1] - 0;
+          var posY = m[2] - 0;
+          play.style.backgroundPosition = posX - (pSpeed > 5 ? pSpeed : 3) + "px " + posY + "px";
+          pSpeed < maxSpeed ? (pSpeed += acceleration) : 0;
+          setTimeout(playPlay, interval);
+        }, interval);
+      };
+      document.body.onload = function () {
+        mask.onclick = function () {
+          bgPlay();
+          playPlay();
+          mask.onclick = null;
+        };
+      };
+    })(window, document)
+  </script>
+</body>
+</html>

@@ -9,3 +9,8 @@
 ## canvas
 
 1. [canvas 的基本操作](https://threegeese.github.io/web-demo/canvas001/)
+
+
+## others
+
+1. [Google Doodle](https://threegeese.github.io/web-demo/others01/)
