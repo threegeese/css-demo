@@ -23,7 +23,7 @@ const app = new Vue({
   data: {
     todos: todoStorage.fetch(),
     newTodo: '',
-    editingTodo: null,
+    editingTodo: null
   },
 
   watch: {
@@ -51,7 +51,8 @@ const app = new Vue({
       let value = this.newTodo && this.newTodo.trim()
       if (value) {
         this.todos.push({
-          title: value
+          title: value,
+          isDone: false
         })
         this.newTodo = ''
       }
@@ -73,6 +74,10 @@ const app = new Vue({
 
     removeTodo (todo) {
       this.todos.splice(this.todos.indexOf(todo), 1)
+    },
+    
+    toggle (todo) {
+      todo.isDone = !todo.isDone
     }
   },
 

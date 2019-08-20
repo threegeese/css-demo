@@ -27,8 +27,8 @@
       <ul class="todo-lists">
         <li v-for="todo in todos" class="todo">
           <div class="todo-wrap">
-            <span class="toggle"></span>
-            <span @dblclick="editTodo(todo)" class="title">{{ todo.title }}</span>
+            <span :class="['toggle', {done: todo.isDone}]" @click="toggle(todo)"></span>
+            <span @dblclick="editTodo(todo)" :class="['title', {finish: todo.isDone}]">{{ todo.title }}</span>
             <span class="remove" @click="removeTodo(todo)">×</span>
             <!-- 当一个元素失去焦点时会触发blur事件 -->
             <input type="text" class="edit"
