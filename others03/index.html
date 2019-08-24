@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>FullPage</title>
+  <style>
+    body { margin: 0; padding: 0; }
+    #app { width: 100%; height: 100%; }
+    #app .page { width: 100%; height: 100%; position: absolute; }
+
+
+
+
+    /* 改变顺序试试 */
+    .pages-down-enter-active {
+      transition: 1s all ease;
+      transform: translateY(0);
+    }
+    .pages-down-enter {
+      transform: translateY(100%);
+    }
+    .pages-down-leave {
+      transform: translateY(0);
+    }
+    .pages-down-leave-active {
+      transition: 1s all ease;
+      transform: translateY(-100%);
+    }
+
+    .pages-up-enter-active {
+      transition: 1s all ease;
+      transform: translateY(0);
+    }
+    .pages-up-enter {
+      transform: translateY(-100%);
+    }
+    .pages-up-leave {
+      transform: translateY(0);
+    }
+    .pages-up-leave-active {
+      transition: 1s all ease;
+      transform: translateY(100%);
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="app">
+    <transition-group :name="mouseActions" tag="div">
+      <div class="page"
+        v-for="(page, index) in pages" 
+        v-show="index === currentIndex"
+        :style="{'background-color': page}"
+        @wheel="pageMove($event)"
+        :key="index"
+      >
+        {{index}}
+      </div>
+    </transition-group>
+  </div>
+
+  <script src="./index.js" type="module"></script>
+</body>
+</html>
