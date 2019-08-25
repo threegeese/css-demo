@@ -13,7 +13,7 @@
 
     /* 改变顺序试试 */
     .pages-down-enter-active {
-      transition: 1.2s all ease;
+      transition: 1s all ease;
       transform: translateY(0);
     }
     .pages-down-enter {
@@ -23,12 +23,12 @@
       transform: translateY(0);
     }
     .pages-down-leave-active {
-      transition: 1.2s all ease;
+      transition: 1s all ease;
       transform: translateY(-100%);
     }
 
     .pages-up-enter-active {
-      transition: 1.2s all ease;
+      transition: 1s all ease;
       transform: translateY(0);
     }
     .pages-up-enter {
@@ -38,7 +38,7 @@
       transform: translateY(0);
     }
     .pages-up-leave-active {
-      transition: 1.2s all ease;
+      transition: 1s all ease;
       transform: translateY(100%);
     }
   </style>
@@ -46,7 +46,7 @@
 <body>
   
   <div id="app">
-    <full-page></full-page>
+    <full-page :bg-color="bgColor" :pages="pages"></full-page>
   </div>
 
   <script src="./index.js" type="module"></script>

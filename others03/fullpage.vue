@@ -2,7 +2,7 @@
   <transition-group :name="mouseActions" tag="div">
     <div class="page" v-for="(page, index) in pages" 
       v-show="index === currentIndex"
-      :style="{'background-color': page}"
+      :style="{'background-color': bgColor && bgColor[index] ? bgColor[index] : defaultColor }"
       @wheel="pageMove($event)"
       @transitionend="moveEnd"
       :key="index"
@@ -14,9 +14,21 @@
 
 <script>
 export default {
+  props: {
+    pages: {
+      number: Number,
+      required: true 
+    },
+    bgColor: {
+      type: Array
+    },
+    defaultColor: {
+      type: String,
+      default: '#ffffc5'
+    }
+  },
   data () {
     return {
-      pages: ['#61f2f5', '#fec771', '#fa5477', '#a1dd70', '#d5a4cf'],
       currentIndex: 0,
       mouseActions: '',
       canMove: true,
@@ -29,7 +41,7 @@ export default {
       this.canMove = false
       if (event.deltaY > 0) {
         this.mouseActions = 'pages-down'
-        if (this.currentIndex === this.pages.length - 1) {
+        if (this.currentIndex === this.pages - 1) {
           this.canMove = true
           this.endCount = 0
           return
@@ -49,6 +61,7 @@ export default {
     },
 
     moveEnd () {
+      // this.endCount 的意义有么？
       this.endCount += 1
       if (this.endCount === 2) {
         this.canMove = true
