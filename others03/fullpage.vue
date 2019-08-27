@@ -1,6 +1,7 @@
 <template>
   <transition-group :name="mouseActions" tag="div">
-    <div class="page" v-for="(page, index) in pages" 
+    <div class="page"
+      v-for="(page, index) in pages" 
       v-show="index === currentIndex"
       :style="{'background-color': bgColor && bgColor[index] ? bgColor[index] : defaultColor }"
       @wheel="pageMove($event)"
@@ -40,28 +41,26 @@ export default {
       if (!this.canMove) return
       this.canMove = false
       if (event.deltaY > 0) {
-        this.mouseActions = 'pages-down'
         if (this.currentIndex === this.pages - 1) {
           this.canMove = true
           this.endCount = 0
           return
-        } else {
-          this.currentIndex += 1
         }
+        this.currentIndex += 1
+        this.mouseActions = 'pages-down'
       } else if (event.deltaY < 0) {
-        this.mouseActions = 'pages-up'
         if (this.currentIndex === 0) {
           this.canMove = true
           this.endCount = 0
           return
-        } else {
-          this.currentIndex -= 1
         }
+        this.mouseActions = 'pages-up'
+        this.currentIndex -= 1
       }
     },
 
     moveEnd () {
-      // this.endCount 的意义有么？
+      // this.endCount 的意义是什么？
       this.endCount += 1
       if (this.endCount === 2) {
         this.canMove = true
