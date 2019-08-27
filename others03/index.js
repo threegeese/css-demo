@@ -27,20 +27,19 @@ Vue.component('full-page', {
     }
   },
   template: `
-    <div>
-      <transition-group :name="mouseActions" tag="div">
+    <div @wheel="pageMove($event)">
+      <transition-group :name="mouseActions" tag="div" @enter="enter" @leave="leave">
         <div class="page"
           v-for="(page, index) in pages"
           v-show="currentIndex === index"
           :style="{'background-color': bgColor && bgColor[index] ? bgColor[index] : defaultColor }"
-          @wheel="pageMove($event)"
+          @transitionend="moveEnd"
           @enter="enter"
           @leave="leave"
-          @transitionend="moveEnd"
           :key="index"
         >
           {{index}}
-          <slot v-if="index === 0" :slotProps="state"></slot>
+          <slot :state="state" :name="'slot' + index"></slot>
         </div>
       </transition-group>
     </div>
@@ -50,21 +49,20 @@ Vue.component('full-page', {
       if (!this.canMove) return
       this.canMove = false
       if (event.deltaY > 0) {
+        this.mouseActions = 'pages-down'
         if (this.currentIndex === this.pages - 1) {
-          console.log(this.canMove)
           this.canMove = true
           this.endCount = 0
           return
         }
         this.currentIndex += 1
-        this.mouseActions = 'pages-down'
       } else if (event.deltaY < 0) {
+        this.mouseActions = 'pages-up'
         if (this.currentIndex === 0) {
           this.canMove = true
           this.endCount = 0
           return
         }
-        this.mouseActions = 'pages-up'
         this.currentIndex -= 1
       }
     },
@@ -76,29 +74,22 @@ Vue.component('full-page', {
         this.state = 'transitionend'
       }
     },
+    // 当只用 JavaScript 过渡的时候，在 enter 和 leave 中必须使用 done 进行回调
+    // 否则，它们将被同步调用，过渡会立即完成（这里使用 css 过渡，done 可以不执行）
     enter (el, done) {
-      console.log(el)
       this.state = 'enter'
-      done()
     },
     leave (el, done) {
       this.state = 'leave'
-      done()
     }
   }
 })
 
 // 使用组件动态展示第一页
 Vue.component('page-one', {
-  template: `
-    <div class="page-one">
-      <span v-html="code" v-for="code in codes"></span>
-      <span v-show="isBlink">|</span>
-    </div>
-  `,
+  props: ['state'],
   data () {
     return {
-      props: ['state'],
       html: 'A Vue Project'.split('').concat(['<br>', '{', '<br>'], 'return "Brad"'.split(''), ['<br>', '}']),
       codes: [],
       codeIndex: 0,
@@ -107,15 +98,23 @@ Vue.component('page-one', {
       blinkTimer: null
     }
   },
+  template: `
+    <div class="page-one">
+      <span v-for="code in codes" v-html="code"></span>
+      <span v-show="isBlink">|</span>
+    </div>
+  `,
   watch: {
     state () {
-      if (this.this.state === 'enter') {
+      if (this.state === 'enter') {
         this.codeTimer = setInterval(this.addCodes, 200);
         this.blinkTimer = setInterval(this.startAnimation, 200);
-      } else if (this.this.state === 'leave') {
+      } else if (this.state === 'leave') {
         this.clear()
         this.codes = []
         this.codeIndex = 0
+      } else {
+        this.isBlink = false
       }
     }
   },
@@ -143,6 +142,6 @@ new Vue({
   el: '#app',
   data: {
     pages: 5,
-    bgColor: ['#61f2f5', '#fec771', '#fa5477', '#a1dd70', '#d5a4cf'],
+    bgColor: ['#61f2f5', '#fec771', '#fa5477', '#a1dd70', '#d5a4cf']
   }
 })

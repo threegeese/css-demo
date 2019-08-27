@@ -75,10 +75,14 @@ export default {
 #app { width: 100%; height: 100%; }
 #app .page { width: 100%; height: 100%; position: absolute; }
 
-/* 改变顺序试试 */
+/* 改变顺序对页面会有影响 */
 .pages-down-enter-active {
   transition: 1.2s all ease;
   transform: translateY(0);
+}
+.pages-down-leave-active {
+  transition: 1.2s all ease;
+  transform: translateY(-100%);
 }
 .pages-down-enter {
   transform: translateY(100%);
@@ -86,23 +90,19 @@ export default {
 .pages-down-leave {
   transform: translateY(0);
 }
-.pages-down-leave-active {
-  transition: 1.2s all ease;
-  transform: translateY(-100%);
-}
 
 .pages-up-enter-active {
   transition: 1.2s all ease;
   transform: translateY(0);
+}
+.pages-up-leave-active {
+  transition: 1.2s all ease;
+  transform: translateY(100%);
 }
 .pages-up-enter {
   transform: translateY(-100%);
 }
 .pages-up-leave {
   transform: translateY(0);
-}
-.pages-up-leave-active {
-  transition: 1.2s all ease;
-  transform: translateY(100%);
 }
 </style>
